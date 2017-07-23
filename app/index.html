@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>First Electron App</title>
+    <link rel="stylesheet" href="../bower_components/semantic/dist/semantic.min.css">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/semantic/dist/semantic.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
+  </head>
+  <body>
+    <div class="ui left vertical menu sidebar">
+      Side menu
+    </div>
+    <div class="pusher">
+      <div class="bar fixed">
+        <div class="ui large secondary menu">
+          <a class="view-ui item" id="menu">
+            <i class="sidebar icon"></i>
+            Menu
+          </a>
+        </div>
+      </div>
+      <div class="ui two item menu">
+        <a class="item active">Tables</a>
+        <a class="item">Overview</a>
+      </div>
+    </div>
+    <script src="js/index.js"></script>
+  </body>
+</html>
