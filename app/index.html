@@ -4,29 +4,304 @@
     <meta charset="utf-8">
     <title>First Electron App</title>
     <link rel="stylesheet" href="../bower_components/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" href="css/index.css">
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script type="text/javascript" src="js/rsvp-3.1.0.min.js"></script>
+    <script type="text/javascript" src="js/sha-256.min.js"></script>
+    <script type="text/javascript" src="js/qz-tray.js"></script>
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/semantic/dist/semantic.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="js/table.json"></script>
+    <script src="js/menu.json"></script>
+    <script src="js/app.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
-  <body>
-    <div class="ui left vertical menu sidebar">
-      Side menu
+  <body ng-app="app" ng-controller="StoreController as storeCtrl">
+    <div class="ui two item menu">
+      <a href ng-click="storeCtrl.orderView = true" class="item active">Tables</a>
+      <a href ng-click="storeCtrl.orderView = false" class="item">Overview</a>
     </div>
-    <div class="pusher">
-      <div class="bar fixed">
-        <div class="ui large secondary menu">
-          <a class="view-ui item" id="menu">
-            <i class="sidebar icon"></i>
-            Menu
-          </a>
+    <div class="height" ng-show="storeCtrl.orderView">
+      <div class="height controller" ng-controller="MenuController as menuCtrl">
+        <div class="fixed">
+          <div class="ui large secondary menu">
+            <a class="view-ui item" id="menu">
+              <i class="sidebar icon"></i>
+              Menu
+            </a>
+          </div>
+          <div class="ui container grid buttons">
+            <button class="ui button two wide column {{$index==menuCtrl.tableNo-1? 'active': ''}}" ng-click="menuCtrl.buttonNumber($index+1)" ng-repeat="table in menuCtrl.table" value="{{$index+1}}">{{table.no}}</button>
+          </div>
+        </div>
+        <div id="sideBarSlide">
+          <div class="ui left vertical menu sidebar">
+            <div id="starters">
+              <h2>Starters</h2>
+              <table class="table-whole" id="item-table-starter" style="width: 100%">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'starters'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+            </div>
+            <div id="mains">
+              <h2>Mains</h2>
+
+              <h3 id="CurryCorner">Curry Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'CurryCorner'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="GulaiCorner">Gulai Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Gulai'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="SambalCorner">Sambal Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Sambal'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="RendangCorner">Rendang Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Rendang'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="MasakLemakCorner">Masak Lemak Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'MasakLemak'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="NasiLemakCorner">Nasi Lemak Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'NasiLemak'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="KurmaCorner">Kurma Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Kurma'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="GardenCorner">Garden Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Garden'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="ChineseCorner">Chinese Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Chinese'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="ChefsSpecial">Chefs Special</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Special'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="DosaCorner">Dosa Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Dosa'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="HawkersCorner">Hawkers Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Hawkers'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="RotiCorner">Roti Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Roti'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3 id="Side">Side Corner</h3>
+              <table class="table-whole" id="item-table-mains">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Side'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+            </div>
+            <div id="drinks">
+              <h2>Drinks</h2>
+
+              <h3>Whites</h3>
+              <table class="table-whole" id="item-table-drinks">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'whitewine'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3>Reds</h3>
+              <table class="table-whole" id="item-table-drinks">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Red'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3>Beers</h3>
+              <table class="table-whole" id="item-table-drinks">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Beer'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+
+              <h3>Soft Drinks</h3>
+              <table class="table-whole" id="item-table-drinks">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'SoftDrinks'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+              <h3>Hot Drinks</h3>
+              <table class="table-whole" id="item-table-drinks">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'HotDrinks'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+              <h3>Sprites</h3>
+              <table class="table-whole" id="item-table-drinks">
+                <tr ng-repeat="menu in menuCtrl.menuItem | filter: 'Sprites'" ng-click="menuCtrl.addMenu(menu)">
+                  <td>
+                    <div><strong>{{menu.name}}</strong></div>
+                  </td>
+                  <td class="price">{{menu.price | currency}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="pusher">
+            <h2>Orders</h2>
+            <div ng-hide="menuCtrl.table[menuCtrl.tableNo-1].occupied">
+              No order(s) is placed.
+            </div>
+            <div class="sidelist-holder" ng-show="menuCtrl.table[menuCtrl.tableNo-1].occupied">
+              <table>
+                <tr ng-repeat="order in menuCtrl.table[menuCtrl.tableNo-1].orders">
+                  <td>{{order.name}}</td>
+                  <td><button ng-click="menuCtrl.removeOne(order)">-</button></td>
+                  <td>{{order.quantity}}</td>
+                  <td><button ng-click="menuCtrl.addOne(order)">+</button></td>
+                  <td>=</td>
+                  <td class="price">{{order.price | currency}}</td>
+                  <td><button ng-click="menuCtrl.removeItem(order)">X</button></td>
+                </tr>
+              </table>
+              <div>You have {{menuCtrl.getItems(menuCtrl.table[menuCtrl.tableNo-1].orders)}} items in your cart</div>
+              <div>Total Cart: {{menuCtrl.getTotal(menuCtrl.table[menuCtrl.tableNo-1]) | currency}}</div>
+              <div>
+                <button class="negative ui button" id="clear-cart" ng-click="menuCtrl.clearCart()">Clear cart</button>
+                <button class="ui button" id="print" ng-click="menuCtrl.printBill()">print</button>
+              </div>
+              <!-- <ul id="show-cart">
+                <li id="sidelist" class="side-items" ng-repeat="order in menuCtrl.table[menuCtrl.tableNo-1].orders">
+                  {{order.name}}
+                  <button ng-click="menuCtrl.removeOne(order)">-</button>
+                  {{order.quantity}}
+                  <button ng-click="menuCtrl.addOne(order)">+</button>
+                  =
+                  {{order.price | currency}}
+                  <button ng-click="menuCtrl.removeItem(order)">X</button>
+                </li>
+              </ul> -->
+            </div>
+          </div>
         </div>
       </div>
-      <div class="ui two item menu">
-        <a class="item active">Tables</a>
-        <a class="item">Overview</a>
+    </div>
+    <div ng-show="!storeCtrl.orderView">
+      <h2>Table Overview</h2>
+      <div class="overview" ng-repeat="table in storeCtrl.tables" ng-show="table.occupied">
+        <h4 class="overview-heading">Table no: {{table.no}}</h4>
+        <p class="overview-amount">{{table.total | currency}}</p>
+        <button class="ui positive button" id="clear-cart" ng-click="storeCtrl.clearCart($index)">Paid</button>
       </div>
     </div>
     <script src="js/index.js"></script>
+    <script src="js/print.js"></script>
   </body>
 </html>

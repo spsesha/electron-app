@@ -1,3 +1,24 @@
 .bar.fixed{
   position: fixed;
 }
+.height{
+  height:91%;
+}
+.height.controller{
+  height: 92.8%;
+}
+#sideBarSlide{
+  height: 75%;
+  margin-top: 20px;
+}
+.pusher{
+  text-align: center;
+  height: 100%;
+  overflow: scroll !important;
+}
+table{
+  width: 100%;
+}
+table td.price{
+  text-align: right !important;
+}

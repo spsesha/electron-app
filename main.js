@@ -36,7 +36,7 @@ function createWindow(){
     slashes: true
   }))
 
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null
@@ -47,7 +47,7 @@ function createWindow(){
     modal: true,
     show: false,
     width: 600,
-    height: 80,
+    height: 120,
     resizable: false,
   })
 
@@ -56,6 +56,7 @@ function createWindow(){
     protocol: 'file',
     slashes: true
   }))
+  aboutWin.setMenu(null)
 
   aboutWin.on('close', e => {
     e.preventDefault();

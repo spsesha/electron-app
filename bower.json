@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "semantic": "^2.2.11"
+    "semantic": "^2.2.11",
+    "angular": "^1.6.5"
   }
 }
