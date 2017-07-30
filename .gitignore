@@ -1,3 +1,8 @@
 bower_components/
 node_modules/
+electron-project-win32-x64/
+release/
 test.js
+SquirrelSetup.log
+Update.exe
+build.js

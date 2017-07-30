@@ -1,4 +1,4 @@
-const {app, BrowserWindow,Menu} = require('electron')
+const {app, BrowserWindow, Menu, shell} = require('electron')
 const path = require('path')
 const url = require('url')
 
@@ -36,7 +36,7 @@ function createWindow(){
     slashes: true
   }))
 
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 
   win.on('closed', () => {
     win = null
@@ -46,8 +46,8 @@ function createWindow(){
     parent: win,
     modal: true,
     show: false,
-    width: 600,
-    height: 120,
+    height: 570,
+    width: 700,
     resizable: false,
   })
 
@@ -62,6 +62,13 @@ function createWindow(){
     e.preventDefault();
     aboutWin.hide();
   })
+
+  aboutWin.webContents.on('new-window', (e, url) => {
+    e.preventDefault();
+    shell.openExternal(url);
+  })
+
+  aboutWin.webContents.openDevTools()
 
 }
 

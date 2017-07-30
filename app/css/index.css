@@ -14,11 +14,44 @@
 .pusher{
   text-align: center;
   height: 100%;
-  overflow: scroll !important;
+  overflow-y: scroll !important;
 }
 table{
   width: 100%;
 }
-table td.price{
+th{
+  text-align: center;
+}
+.price{
   text-align: right !important;
+}
+div h2{
+  text-align: center;
+}
+.ui.styled.accordion .content{
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+.table-center{
+  text-align: center !important;
+}
+.first-row{
+  width: 40%;
+}
+.second-row{
+  width: 25%;
+}
+.third-row{
+  width: 15%;
+}
+.pusher table{
+  padding: 0px 10%;
+}
+.table-whole td{
+  padding: 4px 0px;
+  cursor: pointer;
+}
+.total-summary{
+  line-height: 200%;
+  padding: 15px 0px;
 }

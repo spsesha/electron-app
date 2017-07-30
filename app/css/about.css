@@ -1,6 +1,15 @@
 body{
-  background-color: #8aba87;
-  color: #FFF;
+  background-color: #607d8b;
+  color: #fff;
   text-align: center;
-  font-size: 25px;
+  overflow: hidden;
+}
+.icon{
+  height: 1em !important;
+}
+.ui.buttons .button{
+  margin: 0px 2px;
+}
+h2{
+  margin-top: 15px !important;
 }

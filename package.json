@@ -1,18 +1,21 @@
 {
   "name": "electron-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "A POS system",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "electron": "electron-packager . --overwrite",
+    "build": "node build"
   },
   "dependencies": {
-    "electron": "^1.6.11",
-    "requirejs": "^2.3.4"
+    "electron": "^1.6.11"
   },
   "devDependencies": {
-    "electron": "^1.6.11"
+    "electron": "^1.6.11",
+    "electron-packager": "^8.7.2",
+    "electron-winstaller": "^2.6.3"
   },
   "author": "Sp Sesha",
   "license": "ISC"
