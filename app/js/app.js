@@ -1,7 +1,7 @@
 (function() {
   var app = angular.module('app', []);
 
-  app.controller('StoreController', ['$rootScope', '$filter', function($rootScope, $filter){
+  app.controller('StoreController', ['$rootScope', '$filter', '$sce', function($rootScope, $filter, $sce){
     $rootScope.menuItem = menuJSON;
     $rootScope.table = tableJSON;
 
@@ -84,6 +84,29 @@
       printerPrint(printString);
     };
     this.print = $rootScope.print;
+
+    this.tableOverview = '';
+    this.tableNoForModal = 0;
+    this.showModal = function(table){
+      var orders = table.orders;
+      this.tableNoForModal = table.no;
+      var tableOver = '<table>';
+
+      angular.forEach(orders, (order) => {
+        tableOver += '<tr>';
+        tableOver += '<td>' + order.name + '</td>';
+        tableOver += '<td>' + order.quantity + '</td>';
+        tableOver += '<td class="price">' + $filter('currency')(order.price) + '</td>';
+        tableOver += '</tr>';
+
+      })
+      tableOver += '<table>';
+
+      this.tableOverview = $sce.trustAsHtml(tableOver);
+
+      $('.ui.modal').modal('show');
+    }
+
   }]);
 
   app.controller('MenuController',['$rootScope', '$filter', function($rootScope, $filter){

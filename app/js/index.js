@@ -11,3 +11,4 @@ $('.ui.menu .item').click(function(){
 })
 
 $('.ui.accordion').accordion();
+$('.ui.modal').modal();

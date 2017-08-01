@@ -36,8 +36,6 @@ function createWindow(){
     slashes: true
   }))
 
-  //win.webContents.openDevTools()
-
   win.on('closed', () => {
     win = null
   })
@@ -67,8 +65,6 @@ function createWindow(){
     e.preventDefault();
     shell.openExternal(url);
   })
-
-  aboutWin.webContents.openDevTools()
 
 }
 

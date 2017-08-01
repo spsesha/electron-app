@@ -17,7 +17,7 @@
     <script src="js/app.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
-  <body ng-app="app" ng-controller="StoreController as storeCtrl">
+  <body ng-app="app" ng-controller="StoreController as storeCtrl" ng-cloak>
     <div class="ui two item menu">
       <a href ng-click="storeCtrl.orderView = true" class="item active">Tables</a>
       <a href ng-click="storeCtrl.orderView = false" class="item">Overview</a>
@@ -363,7 +363,12 @@
           <div class="ui fluid card">
             <div class="content">
               <div class="header">Table no: {{table.no}}</div>
-              <div class="description">Total: {{table.total | currency}}</div>
+              <div class="description">
+                Total: {{table.total | currency}}
+                <button class="ui tiny right floated icon button" ng-click="storeCtrl.showModal(table)">
+                  <i class="list icon"></i>
+                </button>
+              </div>
             </div>
             <div class="extra content">
               <div class="ui two buttons">
@@ -372,6 +377,11 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="ui modal">
+        <div class="header">Table no: {{storeCtrl.tableNoForModal}}</div>
+        <div class="scrolling content" ng-bind-html="storeCtrl.tableOverview">
         </div>
       </div>
       <!-- <div class="overview" ng-repeat="table in storeCtrl.tables" ng-show="table.occupied">
