@@ -1,16 +1,14 @@
 {
   "name": "electron-project",
+  "productName": "POS",
   "version": "1.0.0",
   "description": "A POS system",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "electron": "electron-packager . --overwrite",
-    "build": "node build"
-  },
-  "dependencies": {
-    "electron": "^1.6.11"
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyVersion=SS --version-string.FileDescription=SS --version-string.ProductName=\"POS\"",
+    "build": "node installer/windows/createinstaller.js"
   },
   "devDependencies": {
     "electron": "^1.6.11",
