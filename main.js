@@ -26,8 +26,9 @@ function createWindow(){
 
   win = new BrowserWindow({
     width: 800,
-    height: 700,
+    height: 635,
     resizable: false,
+    useContentSize: true
   })
 
   win.loadURL(url.format({
@@ -44,9 +45,10 @@ function createWindow(){
     parent: win,
     modal: true,
     show: false,
-    height: 570,
+    height: 540,
     width: 700,
     resizable: false,
+    useContentSize: true
   })
 
   aboutWin.loadURL(url.format({
